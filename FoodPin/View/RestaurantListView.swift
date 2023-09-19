@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+    // MARK: структура таблиці List
 struct RestaurantListView: View {
     @State var restaurants = [
         Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "Hong Kong", image: "cafedeadend", isFavorite: false),
@@ -30,17 +31,41 @@ struct RestaurantListView: View {
         Restaurant(name: "Donostia", type: "Spanish", location: "London", image: "donostia", isFavorite: false),
         Restaurant(name: "Royal Oak", type: "British", location: "London", image: "royaloak", isFavorite: false),
         Restaurant(name: "CASK Pub and Kitchen", type: "Thai", location: "London", image: "cask", isFavorite: false)]
-        
-        
-    
-
+ 
     @State var restaurantIsFavorites = Array(repeating: false, count: 21)
     
     var body: some View {
         List {
             ForEach(restaurants.indices, id: \.self) { index in
                 BasicTextImageRow(restaurant: $restaurants[index])
+                
+                //свайп зліва направо
+                    .swipeActions(edge: .leading, allowsFullSwipe: false, content: {
+                        Button {
+                                } label: {
+                                    Image(systemName: "heart")
+                                }
+                                .tint(.green)
+                        
+                        
+                        Button {
+                                } label: {
+                                    Image(systemName: "square.and.arrow.up")
+                                }
+                                .tint(.orange)
+                    })
+                
+                
+                
+                
             }
+            
+            // свайп зправа наліво
+            .onDelete(perform: { indexSet in
+                    restaurants.remove(atOffsets: indexSet)
+            })
+            
+            
             
             .listRowSeparator(.hidden)
         }
@@ -48,6 +73,10 @@ struct RestaurantListView: View {
         
     }
 }
+
+
+
+// MARK: структура превью
 struct RestaurantListView_Previews: PreviewProvider {
     static var previews: some View {
         RestaurantListView()
@@ -72,7 +101,7 @@ struct RestaurantListView_Previews: PreviewProvider {
 
 
 
-
+// MARK: структура одного рядка таблиці List
 
 struct BasicTextImageRow: View {
     
@@ -81,9 +110,7 @@ struct BasicTextImageRow: View {
     @State private var showOptions = false
     @State private var showError = false
        
-   
-
-    
+  
     var body: some View {
         
         HStack(alignment: .top, spacing: 20) {
@@ -113,16 +140,44 @@ struct BasicTextImageRow: View {
                 
             }
         }
-
-  
         
+        // MARK: Context menu
+        .contextMenu {
+            Button(action: {
+                    self.showError.toggle()
+            }) {
+                HStack {
+                            Text("Reserve a table")
+                            Image(systemName: "phone")
+                        }
+                }
+            Button(action: {
+                    self.restaurant.isFavorite.toggle()
+            }) {
+            HStack {
+                        Text(restaurant.isFavorite ? "Remove from favorites" : "Mark as favorite")
+                        Image(systemName: "heart")
+                    }
+            } }
+        .alert(isPresented: $showError) {
+            Alert(title: Text("Not yet available"),
+                  message: Text("Sorry, this feature is not available yet. Please retry later."),
+                                primaryButton: .default(Text("OK")),
+                                secondaryButton: .cancel())
+                  }
+        
+        
+        
+        
+  /*
             .onTapGesture {
                 showOptions.toggle()}
+        // MARK: Menu ActionSheet
         .actionSheet(isPresented: $showOptions) {
             var ButtonText = ""
             if restaurant.isFavorite {
                 ButtonText = "Unmark from favorite"} else {ButtonText = "Mark as favorite"}
-            
+           
             return ActionSheet(title: Text("What do you want to do?"),
                         message: nil,
                         buttons: [
@@ -140,6 +195,11 @@ struct BasicTextImageRow: View {
                                 primaryButton: .default(Text("OK")),
                                 secondaryButton: .cancel())
                   }
+        */
+        
+        
+        
+        
         
     }
     
@@ -147,7 +207,7 @@ struct BasicTextImageRow: View {
     
 }
 
-
+// MARK: структура одного рядка таблиці List щоб змінити зовнішній вигляд. просто інший дизаїн
 
 struct FullImageRow: View {
     var imageName: String
