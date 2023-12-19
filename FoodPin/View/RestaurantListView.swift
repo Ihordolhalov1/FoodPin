@@ -33,6 +33,7 @@ struct RestaurantListView: View {
     ]
  
     @State var restaurantIsFavorites = Array(repeating: false, count: 21)
+    @State private var showNewRestaurant = false
     
     var body: some View {
         NavigationView {
@@ -74,9 +75,21 @@ struct RestaurantListView: View {
             .listStyle(.plain)
             .navigationTitle("FoodPin")
             .navigationBarTitleDisplayMode(.automatic)
-        } .accentColor(.white) //кнопка  back зараз біла
+            .toolbar {
+                Button(action: {
+                    self.showNewRestaurant = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            
+            
+        } .accentColor(.primary) //кнопка  + зараз чорна
         
-        
+            .sheet(isPresented: $showNewRestaurant) {
+            NewRestaurantView() //показать вью нового ресторана якшо $showNewRestaurant = true
+        }
+      
         
         
     }

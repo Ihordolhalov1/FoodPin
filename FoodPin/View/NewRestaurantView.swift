@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewRestaurantView: View {
     @State var restaurantName = ""
+    @Environment(\.dismiss) var dismiss
     
     @State private var restaurantImage = UIImage(named: "newphoto")!
     @State private var showPhotoOptions = false
@@ -49,6 +50,21 @@ struct NewRestaurantView: View {
                 }
             // Navigation bar configuration
                 .navigationTitle("New Restaurant")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                } }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                            Text("Save")
+                    }
+                }
+                  .accentColor(.primary)
+            
+            
+            
         }
         .actionSheet(isPresented: $showPhotoOptions) {
             ActionSheet(title: Text("Choose your photo source"),
