@@ -10,6 +10,7 @@ import SwiftUI
 struct RestaurantDetailView: View {
     @Environment(\.dismiss) var dismiss //для кастомной кнопки назад
     var restaurant: Restaurant
+    @State private var showReview = false // контроллировать появление окна review
     var body: some View {
         
        // if restaurant.isFavorite { heartColor = .yellow } else {heartColor = .white  }
@@ -48,30 +49,45 @@ struct RestaurantDetailView: View {
                     .overlay {
                         VStack {
                             
-
+                            
                             Image(systemName: restaurant.isFavorite ? "heart.fill": "heart")
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topTrailing)
                                 .padding()
                                 .font(.system(size: 30))
-                    
+                            
                                 .foregroundColor(restaurant.isFavorite ? .yellow : .white)
                             
                                 .padding(.top, 40)
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(restaurant.name)
-                                    .font(.custom("Nunito-Regular", size: 35, relativeTo: .largeTitle))
-                                    .bold()
-                                Text(restaurant.type)
-                                    .font(.system(.headline, design: .rounded))
-                                    .padding(.all, 5)
-                                    .background(Color.black)
+                            HStack(alignment: .bottom) {
                                 
-                            } //vstack finished
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
-                            .foregroundColor(.white)
-                            .padding()
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text(restaurant.name)
+                                        .font(.custom("Nunito-Regular", size: 35, relativeTo: .largeTitle))
+                                        .bold()
+                                    Text(restaurant.type)
+                                        .font(.system(.headline, design: .rounded))
+                                        .padding(.all, 5)
+                                        .background(Color.black)
+                                    
+                                } //vstack finished
+                                
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
+                                .foregroundColor(.white)
+                                .padding()
+                                
+                                // показать рейтинг
+                                if let rating = restaurant.rating, !showReview {
+                                        Image(rating.image)
+                                            .resizable()
+                                            .frame(width: 60, height: 60)
+                                            .padding([.bottom, .trailing])
+                                            .transition(.scale)
+                                } }
+                                .animation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.3
+                                ), value: restaurant.rating)
                             
-                        } //vstack finished
+                            } //vstack finished
+                        
                     } //overlay finished
                 Text(restaurant.description)
                     .padding()
@@ -107,15 +123,39 @@ struct RestaurantDetailView: View {
                         .cornerRadius(20)
                         .padding()
                 }
+                
+                //кнопка для рейтінга
 
+                Button(action: {
+                    self.showReview.toggle()
+                }) {
+                    Text("Rate it")
+                        .font(.system(.headline, design: .rounded))
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
+                .tint(Color("NavigationBarTitle")) // колір кнопки
+                .buttonStyle(.borderedProminent) // повністю закрашена кнопка
+                .buttonBorderShape(.roundedRectangle(radius: 25))
+                .controlSize(.large) // розмір кнопки
+                .padding(.horizontal)
+                .padding(.bottom, 20)
+                
                 
                 
             } //main vstack finished
         }.ignoresSafeArea() // ScrollView finished
+            .overlay(
+                self.showReview ?
+                ZStack {
+                    ReviewView(isDisplayed: $showReview, restaurant: restaurant)
+                        .navigationBarHidden(true) //заховати кнопку назад
+                }
+                : nil
+                )
         
         
         //кастомна кнопка назад
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true) //заховати кнопку назад
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
@@ -130,7 +170,8 @@ struct RestaurantDetailView: View {
 struct RestaurantDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RestaurantDetailView(restaurant: Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", description: "Searching for great breakfast eateries and coffee? This place is for you. We open at 6:30 every morning, and close at 9 PM. We offer espresso and espresso based drink, such as capuccino, cafe latte, piccolo and many more. Come over and enjoy a great meal.", image: "cafedeadend", isFavorite: false))
+            RestaurantDetailView(restaurant: Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong", phone: "232-923423", description: "Searching for great breakfast eateries and coffee? This place is for you. We open at 6:30 every morning, and close at 9 PM. We offer espresso and espresso based drink, such as capuccino, cafe latte, piccolo and many more. Come over and enjoy a great meal.", image: "cafedeadend", isFavorite: true))
+                .environment(\.dynamicTypeSize, .xxxLarge)
 }
         .accentColor(.white)
     }

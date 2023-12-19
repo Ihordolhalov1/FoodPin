@@ -47,7 +47,7 @@ struct RestaurantListView: View {
                                     } label: {
                                         Image(systemName: "heart")
                                     }
-                                    .tint(.green)
+                                    .tint(.green)// колір кнопки
                             
                             
                             Button {
@@ -69,7 +69,7 @@ struct RestaurantListView: View {
                 
                 
                 
-                .listRowSeparator(.hidden)
+                .listRowSeparator(.hidden) // убрать границы рядов
             }
             .listStyle(.plain)
             .navigationTitle("FoodPin")
