@@ -20,7 +20,7 @@ struct MainView: View {
                 .tag(0)
             
             
-            Text("Discover")
+            DiscoverView()  
                 .tabItem {
                     Label("Discover", systemImage: "wand.and.rays")
                 }

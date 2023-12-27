@@ -15,6 +15,8 @@
 		5D1FDE582B3C5F71003B6733 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FDE572B3C5F71003B6733 /* AboutView.swift */; };
 		5D1FDE5A2B3C669C003B6733 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FDE592B3C669C003B6733 /* WebView.swift */; };
 		5D1FDE5C2B3C6D9A003B6733 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FDE5B2B3C6D9A003B6733 /* SafariView.swift */; };
+		5D1FDE5F2B3CC43D003B6733 /* RestaurantCloudStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FDE5E2B3CC43D003B6733 /* RestaurantCloudStore.swift */; };
+		5D1FDE612B3CC73E003B6733 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FDE602B3CC73E003B6733 /* DiscoverView.swift */; };
 		5D30C5BD2AC1D4FF00F6B49A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30C5BC2AC1D4FF00F6B49A /* MapView.swift */; };
 		5D48EFE32B35F460002084F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48EFE22B35F460002084F5 /* Persistence.swift */; };
 		5D48EFE62B35F5B2002084F5 /* FoodPin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D48EFE42B35F5B2002084F5 /* FoodPin.xcdatamodeld */; };
@@ -40,6 +42,9 @@
 		5D1FDE572B3C5F71003B6733 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		5D1FDE592B3C669C003B6733 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		5D1FDE5B2B3C6D9A003B6733 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		5D1FDE5D2B3C7C2A003B6733 /* FoodPin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodPin.entitlements; sourceTree = "<group>"; };
+		5D1FDE5E2B3CC43D003B6733 /* RestaurantCloudStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCloudStore.swift; sourceTree = "<group>"; };
+		5D1FDE602B3CC73E003B6733 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		5D30C5BC2AC1D4FF00F6B49A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		5D48EFE22B35F460002084F5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5D48EFE52B35F5B2002084F5 /* FoodPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodPin.xcdatamodel; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 				5D1FDE572B3C5F71003B6733 /* AboutView.swift */,
 				5D1FDE592B3C669C003B6733 /* WebView.swift */,
 				5D1FDE5B2B3C6D9A003B6733 /* SafariView.swift */,
+				5D1FDE602B3CC73E003B6733 /* DiscoverView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 			children = (
 				5DAEC0792AB7799F00589817 /* Restaurant.swift */,
 				5D48EFE22B35F460002084F5 /* Persistence.swift */,
+				5D1FDE5E2B3CC43D003B6733 /* RestaurantCloudStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +160,7 @@
 		5DB64C522AAF349B000A70DB /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
+				5D1FDE5D2B3C7C2A003B6733 /* FoodPin.entitlements */,
 				5D48EFE72B372916002084F5 /* ViewModel */,
 				5DAD53FB2B31F8B800308DD6 /* Utilites */,
 				5D0EBD682ABC8E6300B908CA /* Extensions */,
@@ -252,7 +260,9 @@
 				5D4A85A92B29E02E00282D01 /* ReviewView.swift in Sources */,
 				5D30C5BD2AC1D4FF00F6B49A /* MapView.swift in Sources */,
 				5DB64C562AAF349B000A70DB /* RestaurantListView.swift in Sources */,
+				5D1FDE612B3CC73E003B6733 /* DiscoverView.swift in Sources */,
 				5D0EBD6A2ABC8E9600B908CA /* UiColor.swift in Sources */,
+				5D1FDE5F2B3CC43D003B6733 /* RestaurantCloudStore.swift in Sources */,
 				5D0EBD632ABAFE6700B908CA /* RestaurantDetailView.swift in Sources */,
 				5D6E72472B2E087100CBE254 /* NewRestaurantView.swift in Sources */,
 				5D1FDE5C2B3C6D9A003B6733 /* SafariView.swift in Sources */,
@@ -392,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FoodPin/FoodPin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodPin/Preview Content\"";
@@ -411,7 +422,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = personal.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = personal.FoodPin2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -424,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FoodPin/FoodPin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodPin/Preview Content\"";
@@ -443,7 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = personal.FoodPin;
+				PRODUCT_BUNDLE_IDENTIFIER = personal.FoodPin2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
