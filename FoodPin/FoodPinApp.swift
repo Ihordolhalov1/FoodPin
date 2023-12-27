@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct FoodPinApp: App {
+    let persistenceController = PersistenceController.shared
     
     // MARK: customize the font and color of the navigation bar
     init() {
@@ -31,7 +32,9 @@ struct FoodPinApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RestaurantListView()
+            MainView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+
         }
     }
 }
